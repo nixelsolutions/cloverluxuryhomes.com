@@ -794,31 +794,138 @@
     .d3 { transition-delay: 0.3s; }
     .d4 { transition-delay: 0.4s; }
 
-    /* ─── RESPONSIVE ─── */
+    /* ─── HAMBURGER ─── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer;
+      padding: 4px; z-index: 400; flex-shrink: 0;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--cr);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .nav-links-cta { display: none; }
+
+    /* ─── RESPONSIVE 960px ─── */
     @media (max-width: 960px) {
-      nav { padding: 1.5rem 1.5rem; }
+      /* NAV */
+      nav { padding: 1.2rem 1.5rem; }
       nav.scrolled { padding: 0.85rem 1.5rem; }
-      .nav-links { display: none; }
-      #hero { padding: 0 1.5rem 5rem; }
-      .hero-wm { display: none; }
-      .hero-stats { right: 1.5rem; bottom: 5rem; }
+      .nav-hamburger { display: flex; }
+      .nav-cta { display: none; }
+      .nav-links {
+        position: fixed; inset: 0;
+        background: var(--vp);
+        flex-direction: column; align-items: center; justify-content: center;
+        gap: 2.5rem; z-index: 299; list-style: none;
+        transform: translateX(100%);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex !important;
+      }
+      .nav-links.open { transform: translateX(0); }
+      .nav-links a {
+        font-size: 0.8rem; font-weight: 400;
+        letter-spacing: 0.28em; text-transform: uppercase;
+        color: rgba(243,237,226,0.75); text-decoration: none;
+        transition: color 0.3s;
+      }
+      .nav-links a:hover { color: var(--oro3); }
+      .nav-links a::after { display: none; }
+      .nav-links-cta { display: list-item; margin-top: 0.5rem; }
+      .nav-links-cta a {
+        color: var(--vp) !important; background: var(--oro);
+        padding: 0.9rem 2.2rem; letter-spacing: 0.22em;
+      }
+
+      /* HERO */
+      #hero { padding: 7rem 1.5rem 4rem; justify-content: center; }
+      .hero-wm, .hero-line, .hero-line-2 { display: none; }
+      .hero-title { font-size: clamp(2.8rem, 10vw, 4.5rem); margin-bottom: 1.5rem; }
+      .hero-sub { font-size: 0.88rem; margin-bottom: 2rem; max-width: 100%; }
+      .hero-actions { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+      .hero-stats { display: none; }
+      .scroll-ind { display: none; }
+
+      /* SECTIONS */
       section { padding: 5rem 1.5rem; }
-      #propuesta, #red { grid-template-columns: 1fr; gap: 3.5rem; }
-      .met-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+
+      /* PROPUESTA */
+      #propuesta { grid-template-columns: 1fr; gap: 3rem; }
+      .pilar { padding: 1.75rem 1.5rem; }
+      .pilar-titulo { font-size: 1.4rem; }
+      .prop-sub { max-width: 100%; }
+
+      /* METODOLOGÍA */
+      .met-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-bottom: 3rem; }
+      .met-intro { max-width: 100%; }
       .steps { grid-template-columns: 1fr; }
+      .step { padding: 2rem 1.5rem; }
       .step:not(:last-child)::after { display: none; }
-      .comparaciones-grid { grid-template-columns: 1fr; }
-      .red-bg-num { font-size: 5rem; }
-      .vt-header { flex-direction: column; align-items: flex-start; }
-      .comparativa { grid-template-columns: 1.5fr 1fr 1fr; }
-      #contacto { grid-template-columns: 1fr; min-height: auto; }
-      .contacto-izq, .contacto-der { padding: 5rem 1.5rem; }
-      .contacto-izq::after { display: none; }
-      .footer-top { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
-      .form-row { grid-template-columns: 1fr; }
-      .plusvalia-banner { flex-direction: column; text-align: center; }
+      .step-num { font-size: 3.5rem; }
+      .step-titulo { font-size: 1.35rem; }
+      .plusvalia-banner { flex-direction: column; text-align: center; padding: 2.5rem 1.5rem; gap: 1.5rem; }
       .plusvalia-banner::before { display: none; }
+      .pv-text { font-size: 1.2rem; max-width: 100%; }
+      .pv-num { font-size: 3rem; }
+
+      /* TRANSFORMACIONES */
+      .comparaciones-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+
+      /* RED */
+      #red { grid-template-columns: 1fr; gap: 3rem; }
+      .red-bg-num { font-size: 4rem; }
+      .red-valores { grid-template-columns: 1fr; }
+      .valor-item { padding: 1.5rem; }
+
+      /* VENTAJAS — hide "tradicional" column, keep feature + Clover */
+      .vt-header { flex-direction: column; align-items: flex-start; gap: 1rem; margin-bottom: 3rem; }
+      .vt-sub { max-width: 100%; }
+      .comparativa { grid-template-columns: 1.8fr 1fr; }
+      .c-head.trad-h, .c-cell.trad-c { display: none; }
+      .c-head:first-child { border-right: none; }
+      .c-head { padding: 1.25rem 1rem; }
+      .c-cell { padding: 0.9rem 1rem; }
+      .c-cell.feature { font-size: 0.8rem; border-right: none; }
+
+      /* CONTACTO */
+      #contacto { grid-template-columns: 1fr; min-height: auto; }
+      .contacto-izq { padding: 4rem 1.5rem 3rem; }
+      .contacto-izq::after { display: none; }
+      .contacto-der { padding: 3rem 1.5rem 4rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .cm-value { font-size: 1rem; }
+
+      /* FOOTER */
+      footer { padding: 4rem 1.5rem 2rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; padding-bottom: 2.5rem; }
+      .footer-brand { grid-column: 1 / -1; }
+      .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
+      .footer-legal { gap: 1.25rem; flex-wrap: wrap; justify-content: center; }
+    }
+
+    /* ─── RESPONSIVE 480px ─── */
+    @media (max-width: 480px) {
+      .logo-text { font-size: 1.25rem; }
+
+      #hero { padding: 6rem 1.25rem 3.5rem; }
+      .hero-title { font-size: clamp(2.4rem, 11vw, 3.2rem); }
+      .eyebrow span { font-size: 0.58rem; }
+      .btn-primary { width: 100%; text-align: center; padding: 0.9rem 1.5rem; }
+
+      section { padding: 4rem 1.25rem; }
+      .seccion-titulo { font-size: clamp(2rem, 9vw, 2.8rem); }
+
+      .pilar { padding: 1.5rem 1.25rem; }
+      .step { padding: 1.75rem 1.25rem; }
+      .plusvalia-banner { padding: 2rem 1.25rem; }
+
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-legal { flex-direction: column; gap: 0.5rem; }
     }
   </style>
 </head>
@@ -838,14 +945,18 @@
       </svg>
       <span class="logo-text">CLOV<em>E</em>R</span>
     </a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="navLinks">
       <li><a href="#propuesta">Propuesta</a></li>
       <li><a href="#metodologia">Metodología</a></li>
       <li><a href="#transformaciones">Transformaciones</a></li>
       <li><a href="#red">La Red</a></li>
       <li><a href="#ventajas">Ventajas</a></li>
+      <li class="nav-links-cta"><a href="#contacto">Solicitar Valoración</a></li>
     </ul>
     <a href="#contacto" class="nav-cta"><span>Solicitar Valoración</span></a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- HERO -->
@@ -1287,6 +1398,22 @@
       slider.addEventListener('touchstart', e => { active = true; move(e.touches[0].clientX); }, { passive: true });
       window.addEventListener('touchmove',  e => { if (active) move(e.touches[0].clientX); },   { passive: true });
       window.addEventListener('touchend',   () => { active = false; });
+    });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('navHamburger');
+    const navLinks  = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+        document.body.style.overflow = '';
+      });
     });
   </script>
 </body>
