@@ -828,11 +828,11 @@
         background: var(--vp);
         flex-direction: column; align-items: center; justify-content: center;
         gap: 2.5rem; z-index: 299; list-style: none;
-        transform: translateX(100%);
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0; visibility: hidden; pointer-events: none;
+        transition: opacity 0.35s ease, visibility 0.35s ease;
         display: flex !important;
       }
-      .nav-links.open { transform: translateX(0); }
+      .nav-links.open { opacity: 1; visibility: visible; pointer-events: all; }
       .nav-links a {
         font-size: 0.8rem; font-weight: 400;
         letter-spacing: 0.28em; text-transform: uppercase;
