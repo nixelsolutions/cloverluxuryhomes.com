@@ -814,7 +814,12 @@
     /* ─── RESPONSIVE 960px ─── */
     @media (max-width: 960px) {
       /* NAV */
-      nav { padding: 1.2rem 1.5rem; }
+      nav {
+        padding: 1.2rem 1.5rem;
+        background: rgba(13,32,22,0.97);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 1px 0 rgba(200,160,64,0.1);
+      }
       nav.scrolled { padding: 0.85rem 1.5rem; }
       .nav-hamburger { display: flex; }
       .nav-cta { display: none; }
@@ -878,7 +883,9 @@
 
       /* RED */
       #red { grid-template-columns: 1fr; gap: 3rem; }
-      .red-bg-num { font-size: 4rem; }
+      .red-bg-num { display: none; }
+      .red-stats { position: static; transform: none; gap: 2rem; }
+      .r-stat-num { font-size: 2.2rem; }
       .red-valores { grid-template-columns: 1fr; }
       .valor-item { padding: 1.5rem; }
 
